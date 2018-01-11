@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ray.Core" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BitEx.Core\BitEx.Core.csproj" />
+    <ProjectReference Include="..\BitEx.Model\BitEx.Model.csproj" />
+  </ItemGroup>
+
+</Project>
