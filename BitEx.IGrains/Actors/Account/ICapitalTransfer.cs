@@ -10,6 +10,6 @@ namespace BitEx.IGrain.Actors
     /// </summary>
     public interface ICapitalTransfer : IGrainWithStringKey
     {
-        Task<TResult> CreateAsync(string commandId, string fromAccountId, string toAccountId, string currencyId, decimal amount, string txNo, decimal txFee, string remark, int operatorId);
+        Task<Result> CreateAsync(string commandId, string fromAccountId, string toAccountId, string currencyId, decimal amount, string txNo, decimal txFee, string remark, int operatorId);
     }
 }

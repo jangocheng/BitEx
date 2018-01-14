@@ -1,4 +1,4 @@
-﻿using Coin.Core;
+﻿using BitEx.Core;
 using MongoDB.Bson.Serialization.Attributes;
 using Orleans.Concurrency;
 using System;
@@ -12,7 +12,7 @@ namespace BitEx.IGrain.Entity.User
         public string Id { get; set; }
         public string UserId { get; set; }
         public UserLogType Type { get; set; }
-        public LangType LangType { get; set; }
+        public Lang Lang { get; set; }
         public UserLogLevel Level { get; set; }
         public string Log { get; set; }
         public DateTime Time { get; set; }

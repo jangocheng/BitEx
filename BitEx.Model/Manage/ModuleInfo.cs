@@ -2,7 +2,7 @@
 using BitEx.Dapper.Core;
 using ProtoBuf;
 
-namespace Coin.Model.Manage
+namespace BitEx.Model.Manage
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     [Table("Coin_Module", autoIncrement: true)]

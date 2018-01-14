@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Coin.Model.Lang
+namespace BitEx.Model.Lang
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class LangText

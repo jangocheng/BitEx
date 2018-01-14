@@ -28,7 +28,7 @@ namespace BitEx.IGrain.Events.User
         public WithdrawRepealedEvent()
         {
         }
-        public WithdrawRepealedEvent(string commandId, string userId, string currencyId, decimal amount, TResult result)
+        public WithdrawRepealedEvent(string commandId, string userId, string currencyId, decimal amount, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

@@ -14,7 +14,7 @@ namespace BitEx.IGrain.Actors
     public interface ICoinAccount : IGrainWithStringKey
     {
         Task GenerateAddress();
-        Task<TResult> ChangeAddressAsync(string commandId, string address);
+        Task<Result> ChangeAddressAsync(string commandId, string address);
         Task<decimal> GetBalance();
         Task<decimal> GetLockedAmount();
         Task<decimal> GetMortgagedAmount();
@@ -28,18 +28,18 @@ namespace BitEx.IGrain.Actors
         Task DepositAsync(string messageId, string depositId, decimal volume);
         Task DepositByManagerAsync(string messageId, string depositId, decimal volume);
         Task RollbackDepositAsync(string depositId, decimal volume);
-        Task<TResult> MortgageAsync(string messageId, string depositId, string depositCurrencyId, decimal depositAmount);
-        Task<TResult> BalanceAsync(string depositId, string depositCurrencyId, decimal depositAmount);
+        Task<Result> MortgageAsync(string messageId, string depositId, string depositCurrencyId, decimal depositAmount);
+        Task<Result> BalanceAsync(string depositId, string depositCurrencyId, decimal depositAmount);
         Task RepealMortgageAsync(string commandId, string messageId, string guaranteeId, decimal volume);
-        Task<TResult> RedeemMortgageAsync(string messageId, string depositId, string guaranteeId, bool isMortgagedVirtualCoin, string mortgagedAccountId, decimal mortgagedAmount, decimal depositAmount);
+        Task<Result> RedeemMortgageAsync(string messageId, string depositId, string guaranteeId, bool isMortgagedVirtualCoin, string mortgagedAccountId, decimal mortgagedAmount, decimal depositAmount);
         Task RedeemMortgageIncreaseAsync(string commandId, string messageId, string depositId, string guaranteeId, decimal amount);
-        Task RedeemMortgageDecreaseAsync(string commandId, string messageId, string depositId, string guaranteeId, decimal amount, TResult result);
-        Task<TResult> CreateBidOrderAsync(string marketId, OrderSource orderSource, decimal price, decimal volume);
-        Task<TResult> CreateAskOrderAsync(string marketId, OrderSource orderSource, decimal price, decimal volume);
-        Task<TResult> CreateBidPlanOrderAsync(string marketId, OrderSource orderSource, decimal highTriggerPrice, decimal lowTriggerPrice, decimal highPrice, decimal lowPrice, decimal amount);
-        Task<TResult> CreateAskPlanOrderAsync(string marketId, OrderSource orderSource, decimal highTriggerPrice, decimal lowTriggerPrice, decimal highPrice, decimal lowPrice, decimal volume);
-        Task<TResult> CreateBidBatchOrderAsync(string marketId, OrderSource orderSource, BatchOrderType batchType, decimal highPrice, decimal lowPrice, decimal volume);
-        Task<TResult> CreateAskBatchOrderAsync(string marketId, OrderSource orderSource, BatchOrderType batchType, decimal highPrice, decimal lowPrice, decimal volume);
+        Task RedeemMortgageDecreaseAsync(string commandId, string messageId, string depositId, string guaranteeId, decimal amount, Result result);
+        Task<Result> CreateBidOrderAsync(string marketId, OrderSource orderSource, decimal price, decimal volume);
+        Task<Result> CreateAskOrderAsync(string marketId, OrderSource orderSource, decimal price, decimal volume);
+        Task<Result> CreateBidPlanOrderAsync(string marketId, OrderSource orderSource, decimal highTriggerPrice, decimal lowTriggerPrice, decimal highPrice, decimal lowPrice, decimal amount);
+        Task<Result> CreateAskPlanOrderAsync(string marketId, OrderSource orderSource, decimal highTriggerPrice, decimal lowTriggerPrice, decimal highPrice, decimal lowPrice, decimal volume);
+        Task<Result> CreateBidBatchOrderAsync(string marketId, OrderSource orderSource, BatchOrderType batchType, decimal highPrice, decimal lowPrice, decimal volume);
+        Task<Result> CreateAskBatchOrderAsync(string marketId, OrderSource orderSource, BatchOrderType batchType, decimal highPrice, decimal lowPrice, decimal volume);
         Task CancelOrderAsync(MarketOrderCanceledEvent @event);
         Task TradeBuyAsync(string commandId, string messageId, string marketId, int tradeId, string orderId, decimal amount, decimal returnAmount);
         Task TradeSellAsync(string commandId, string messageId, string marketId, int tradeId, string orderId, decimal volume, decimal price, decimal returnVolume);
@@ -62,7 +62,7 @@ namespace BitEx.IGrain.Actors
         /// <param name="operatorId"></param>
         /// <param name="remark"></param>
         /// <returns></returns>
-        Task<TResult> UpdateAmount(decimal addBalance, decimal addLocked, decimal addMortgaged, string operatorId, string remark);
+        Task<Result> UpdateAmount(decimal addBalance, decimal addLocked, decimal addMortgaged, string operatorId, string remark);
         Task RemoveWithdrawAddress(string addressId);
         Task<List<WithdrawAddress>> GetWithdrawAddressList();
         Task<TradeProfit> GetTradeProfit(string marketId);

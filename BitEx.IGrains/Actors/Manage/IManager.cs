@@ -6,7 +6,7 @@ using Orleans;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Coin.Model.Manage;
+using BitEx.Model.Manage;
 using BitEx.IGrain.Entity;
 
 namespace BitEx.IGrain.Actors.Manage
@@ -30,8 +30,8 @@ namespace BitEx.IGrain.Actors.Manage
         Task<ManagerLoginVerifyStatus> LoginVerify(string loginKey, string ip);
         Task Loginout();
         #endregion
-        Task<TResult> UpdatePassword(string password, string code);
-        Task<TResult> UpdatePassword(string password);
+        Task<Result> UpdatePassword(string password, string code);
+        Task<Result> UpdatePassword(string password);
         Task<OtpInfo> GetOtpSecretKey();
         Task<int[]> GetModuleLimits(string moduleKey);
         Task<ManagerDto> GetInfo();

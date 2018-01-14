@@ -28,7 +28,7 @@ namespace BitEx.IGrain.Events
         public DepositRepealedEvent()
         {
         }
-        public DepositRepealedEvent(string commandId, string fundSourceId, string accountId, string capitalAccountId, decimal amount, int operatorId, TResult result)
+        public DepositRepealedEvent(string commandId, string fundSourceId, string accountId, string capitalAccountId, decimal amount, int operatorId, Result result)
         {
             this.CommandId = commandId;
             this.FundSourceId = fundSourceId;

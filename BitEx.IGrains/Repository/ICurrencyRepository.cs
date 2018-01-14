@@ -2,7 +2,7 @@
 using BitEx.IGrain.Entity;
 using BitEx.IGrain.Entity.Currency;
 using BitEx.IGrain.States;
-using Coin.Model.Currency;
+using BitEx.Model.Currency;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -8,12 +8,12 @@ namespace BitEx.IGrain.Actors
     public interface IWithdraw : IGrainWithStringKey
     {
        // Task CreateAsync(string commandId, string msgId, string userId, string currencyId, string accountId, BankType accountType, string subbranch, string accountNumber, string province, string city, decimal amount, decimal txAmount, decimal fee);
-        Task<TResult> AssignAsync(int operatorId);
-        Task<TResult> HandleAsync(int operatorId);
-        Task<TResult> ResetHandleAsync(int operatorId);
-        Task<TResult> CompleteAsync(string capitalAccountId, string txNo, decimal txFee, int operatorId);
-        Task<TResult> RollbackAsync(string reason, int operatorId);
-        Task<TResult> RepealAsync();
+        Task<Result> AssignAsync(int operatorId);
+        Task<Result> HandleAsync(int operatorId);
+        Task<Result> ResetHandleAsync(int operatorId);
+        Task<Result> CompleteAsync(string capitalAccountId, string txNo, decimal txFee, int operatorId);
+        Task<Result> RollbackAsync(string reason, int operatorId);
+        Task<Result> RepealAsync();
         Task<WithdrawCompleteVerifyDto> GetWithdrawCompleteVerifyInfo();
         Task<decimal> GetWithdrawAmount();
         Task<string> GetCurrencyId();

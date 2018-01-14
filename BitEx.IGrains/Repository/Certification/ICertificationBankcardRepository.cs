@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Coin.Framework.ThirdParty;
-using Coin.Model.Certification;
+using BitEx.Model.Certification;
 
 namespace BitEx.IGrain.Repository.Certification
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coin.Model.Notice
+namespace BitEx.Model.Notice
 {
     public class SmsInfo
     {

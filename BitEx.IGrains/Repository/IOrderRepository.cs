@@ -1,4 +1,4 @@
-﻿using Coin.Model.Order;
+﻿using BitEx.Model.Order;
 using BitEx.IGrain.States;
 using System;
 using System.Collections.Generic;

@@ -29,7 +29,7 @@ namespace BitEx.IGrain.Events.User
         public WithdrawCanceledEvent()
         {
         }
-        public WithdrawCanceledEvent(string commandId, string userId, string capitalAccountId, decimal amount, decimal fee, TResult result, int operatorId)
+        public WithdrawCanceledEvent(string commandId, string userId, string capitalAccountId, decimal amount, decimal fee, Result result, int operatorId)
         {
             this.CommandId = commandId;
             this.UserId = userId;

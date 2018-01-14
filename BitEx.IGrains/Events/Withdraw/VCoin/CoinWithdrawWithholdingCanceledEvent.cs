@@ -18,7 +18,7 @@ namespace BitEx.IGrain.Events
         public string Address { get; set; }
         public decimal Balance { get; set; }
         public decimal LastTotalAmount { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         private static string _TypeCode = typeof(CoinWithdrawWithholdingCanceledEvent).FullName;
         [ProtoIgnore]
         public string TypeCode { get { return _TypeCode; } }
@@ -26,7 +26,7 @@ namespace BitEx.IGrain.Events
         public CoinWithdrawWithholdingCanceledEvent()
         {
         }
-        public CoinWithdrawWithholdingCanceledEvent(string commandId, string userId, string currencyId, string address, decimal balance, TResult result)
+        public CoinWithdrawWithholdingCanceledEvent(string commandId, string userId, string currencyId, string address, decimal balance, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

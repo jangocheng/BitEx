@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
 using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -37,14 +35,5 @@ namespace BitEx.IGrain.Events.User
             this.Value = value;
         }
         public SetUserConfigEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                modelState.UserConfigList.First(u => u.Key == this.Key).Value = Value;
-            }
-        }
     }
 }

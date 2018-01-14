@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Coin.Model.Cms;
+using BitEx.Model.Cms;
 using BitEx.Dapper.Core;
 
 namespace BitEx.IGrain.Repository

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BitEx.Dapper.Core;
 
-namespace Coin.Model.User
+namespace BitEx.Model.User
 {
     [Table("Coin_Certification", autoIncrement: false)]
     public class Certification

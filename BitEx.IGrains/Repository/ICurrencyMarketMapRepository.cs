@@ -1,4 +1,4 @@
-﻿using Coin.Model.Withdrawl;
+﻿using BitEx.Model.Withdrawl;
 using System.Threading.Tasks;
 
 namespace BitEx.IGrain.Repository

@@ -1,11 +1,7 @@
 ﻿using System;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
-using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
-using Coin.Core.Lib;
-using Coin.Framework.ThirdParty;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -27,43 +23,20 @@ namespace BitEx.IGrain.Events.User
                 return _TypeCode;
             }
         }
-        public BankType BankType { get; set; }
+        public string Country { get; set; }
         public string Bank { get; set; }
-        public string Province { get; set; }
-        public string City { get; set; }
-        public string BranchBank { get; set; }
         public string CardNumber { get; set; }
+        public string NoteInfo { get; set; }
         public DateTime Timestamp { get; set; }
 
         public UInt32 Version { get; set; }
-        public AddBankCardEvent(BankType bankType, string bank, string province, string city, string branchBank, string cardNumber)
+        public AddBankCardEvent(string country, string bank,string cardNumber,string noteInfo)
         {
-            this.Province = province;
-            this.City = city;
-            this.BankType = bankType;
+            this.Country = country;
             this.Bank = bank;
-            this.BranchBank = branchBank;
             this.CardNumber = cardNumber;
+            this.NoteInfo = noteInfo;
         }
         public AddBankCardEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                var bankCard = new BankCardInfo()
-                {
-                    Id = this.Id,
-                    BankType = this.BankType,
-                    Province = this.Province,
-                    City = this.City,
-                    CardNumber = this.CardNumber,
-                    Bank = this.Bank,
-                    BranchBank = this.BranchBank
-                };
-                modelState.BankCardList.Add(bankCard);
-            }
-        }
     }
 }

@@ -5,15 +5,23 @@ VisualStudioVersion = 15.0.27309.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitEx.Core", "BitEx.Core\BitEx.Core.csproj", "{BDAB042B-6E3B-4F8F-AE30-BE0900220B65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.IGrain", "BitEx.IGrains\BitEx.IGrain.csproj", "{B0319DCE-733E-4937-8E4D-537BA15DAACF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitEx.IGrain", "BitEx.IGrains\BitEx.IGrain.csproj", "{B0319DCE-733E-4937-8E4D-537BA15DAACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.Model", "BitEx.Model\BitEx.Model.csproj", "{AF56D8F0-0A31-4FE9-80AD-E9CB06B19C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitEx.Model", "BitEx.Model\BitEx.Model.csproj", "{AF56D8F0-0A31-4FE9-80AD-E9CB06B19C32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{9B7262A0-7EDF-4AED-BC59-D3F7EB880A68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.Dapper", "BitEx.Dapper\BitEx.Dapper.csproj", "{1C9E68E9-DED3-4BD0-9E6F-73690A13C568}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitEx.Dapper", "BitEx.Dapper\BitEx.Dapper.csproj", "{1C9E68E9-DED3-4BD0-9E6F-73690A13C568}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.ThirdParty", "BitEx.ThirdParty\BitEx.ThirdParty.csproj", "{05ABCF97-0350-4278-8A32-EB1A2FB21F79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitEx.ThirdParty", "BitEx.ThirdParty\BitEx.ThirdParty.csproj", "{05ABCF97-0350-4278-8A32-EB1A2FB21F79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.Grain", "BitEx.Grain\BitEx.Grain.csproj", "{C3DAE855-EB71-407E-B84B-4FF901539A95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.IRepository", "BitEx.IRepository\BitEx.IRepository.csproj", "{5C96D01D-18EB-4495-B1AD-31CAF2D641DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.Repository", "BitEx.Repository\BitEx.Repository.csproj", "{310A7346-4EDC-4D26-AE41-FCA68190B7F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitEx.Framework", "BitEx.Framework\BitEx.Framework.csproj", "{A7FD9EBF-6A03-44C1-96E5-818C8A9D2E1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +49,22 @@ Global
 		{05ABCF97-0350-4278-8A32-EB1A2FB21F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05ABCF97-0350-4278-8A32-EB1A2FB21F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05ABCF97-0350-4278-8A32-EB1A2FB21F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3DAE855-EB71-407E-B84B-4FF901539A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3DAE855-EB71-407E-B84B-4FF901539A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3DAE855-EB71-407E-B84B-4FF901539A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3DAE855-EB71-407E-B84B-4FF901539A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C96D01D-18EB-4495-B1AD-31CAF2D641DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C96D01D-18EB-4495-B1AD-31CAF2D641DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C96D01D-18EB-4495-B1AD-31CAF2D641DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C96D01D-18EB-4495-B1AD-31CAF2D641DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310A7346-4EDC-4D26-AE41-FCA68190B7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310A7346-4EDC-4D26-AE41-FCA68190B7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310A7346-4EDC-4D26-AE41-FCA68190B7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310A7346-4EDC-4D26-AE41-FCA68190B7F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7FD9EBF-6A03-44C1-96E5-818C8A9D2E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FD9EBF-6A03-44C1-96E5-818C8A9D2E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FD9EBF-6A03-44C1-96E5-818C8A9D2E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FD9EBF-6A03-44C1-96E5-818C8A9D2E1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

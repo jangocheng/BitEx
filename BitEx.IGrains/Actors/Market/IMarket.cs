@@ -74,7 +74,7 @@ namespace BitEx.IGrain.Actors
         /// <param name="amounts">成交额列表</param>
         /// <returns></returns>
         [AlwaysInterleave]
-        Task<TResult> OrderVerify(decimal[] prices, decimal[] amounts, decimal[] volumes = null);
+        Task<Result> OrderVerify(decimal[] prices, decimal[] amounts, decimal[] volumes = null);
         /// <summary>
         /// 计划订单校验
         /// </summary>
@@ -86,6 +86,6 @@ namespace BitEx.IGrain.Actors
         /// <param name="amount"></param>
         /// <returns></returns>
         [AlwaysInterleave]
-        Task<TResult> PlanOrderVerify(OrderType orderType, decimal highTriggerPrice, decimal lowTriggerPrice, decimal hightPrice, decimal lowPrice, decimal amount);
+        Task<Result> PlanOrderVerify(OrderType orderType, decimal highTriggerPrice, decimal lowTriggerPrice, decimal hightPrice, decimal lowPrice, decimal amount);
     }
 }

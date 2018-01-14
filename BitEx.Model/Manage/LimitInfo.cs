@@ -1,7 +1,7 @@
 ﻿using System;
 using BitEx.Dapper.Core;
 
-namespace Coin.Model.Manage
+namespace BitEx.Model.Manage
 {
     [Table("Coin_Limit", autoIncrement: true)]
     public class LimitInfo

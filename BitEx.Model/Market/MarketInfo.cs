@@ -2,7 +2,7 @@
 using ProtoBuf;
 using System;
 
-namespace Coin.Model.Market
+namespace BitEx.Model.Market
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     [Table("coin_market", autoIncrement: false)]

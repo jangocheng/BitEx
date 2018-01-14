@@ -19,7 +19,7 @@ namespace BitEx.IGrain.Events
         public string CapitalAccountId { get; set; }
         public DepositWay DepositWay { get; set; }
         public decimal Amount { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         private static string _TypeCode = typeof(DepositApplicationFailedEvent).FullName;
         [ProtoIgnore]
         public string TypeCode { get { return _TypeCode; } }
@@ -27,7 +27,7 @@ namespace BitEx.IGrain.Events
         public DepositApplicationFailedEvent()
         {
         }
-        public DepositApplicationFailedEvent(string commandId, string userId, string accountId, string currencyId, string capitalAccountId, DepositWay depositWay, decimal amount, TResult result)
+        public DepositApplicationFailedEvent(string commandId, string userId, string accountId, string currencyId, string capitalAccountId, DepositWay depositWay, decimal amount, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

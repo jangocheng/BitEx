@@ -16,7 +16,7 @@ namespace BitEx.IGrain.Actors
         Task ModifyDepositNotifyLine(decimal amount, int operatorId);
         Task ModifyHotBalanceAsync(decimal balance);
         Task ModifyCurrencyInfoAsync(decimal balance, decimal difficulty, int peerCount, long height);
-        Task<TResult> TransferToAsync(CoinTransferType txType, string fromAddress, string targetAddress, decimal volume, decimal fee, string txNo, string remark, int operatorId);
+        Task<Result> TransferToAsync(CoinTransferType txType, string fromAddress, string targetAddress, decimal volume, decimal fee, string txNo, string remark, int operatorId);
         [AlwaysInterleave]
         Task<bool> IsVirtualCoin();
         [AlwaysInterleave]

@@ -1,7 +1,7 @@
 ﻿using BitEx.Dapper.Core;
 using BitEx.IGrain.Entity;
 using BitEx.IGrain.States;
-using Coin.Model.Market;
+using BitEx.Model.Market;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

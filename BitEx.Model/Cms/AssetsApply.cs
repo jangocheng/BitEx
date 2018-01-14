@@ -1,7 +1,7 @@
 ﻿using System;
 using BitEx.Dapper.Core;
 
-namespace Coin.Model.Cms
+namespace BitEx.Model.Cms
 {
     [Table("Coin_AssetsApply", autoIncrement: true)]
     public class AssetsApply

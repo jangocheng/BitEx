@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coin.Model.User.Dto
+namespace BitEx.Model.User.Dto
 {
     /// <summary>
     /// 推广人分红统计信息

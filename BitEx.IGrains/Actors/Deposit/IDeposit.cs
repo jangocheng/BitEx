@@ -14,8 +14,8 @@ namespace BitEx.IGrain.Actors
         Task ConfimAsync(string fundSourceId, int operatorId);
         Task YSBConfimAsync(string fundSourceId, int operatorId);
         Task ConfimAsync(string fundSourceId, string capitalAccountId, int operatorId);
-        Task<TResult> ResetAsync(int operatorId);
-        Task<TResult> RepealAsync(string reason, int operatorId);
+        Task<Result> ResetAsync(int operatorId);
+        Task<Result> RepealAsync(string reason, int operatorId);
         Task<FundInfo> GetFundInfo();
         Task<int> GetIdentify();
     }

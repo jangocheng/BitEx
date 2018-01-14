@@ -1,7 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 
-namespace Coin.Model.Currency
+namespace BitEx.Model.Currency
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class CurrencyNameDto

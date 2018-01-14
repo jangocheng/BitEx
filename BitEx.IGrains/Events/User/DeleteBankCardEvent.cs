@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
-using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -35,18 +32,5 @@ namespace BitEx.IGrain.Events.User
             this.CardId = id;
         }
         public DeleteBankCardEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                var card = modelState.BankCardList.FirstOrDefault(b => b.Id.Equals(this.CardId));
-                if (card != null)
-                {
-                    modelState.BankCardList.Remove(card);
-                }
-            }
-        }
     }
 }

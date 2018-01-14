@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BitEx.Dapper.Core;
-using Coin.Model.Account;
-using Coin.Model.User.Dto;
+using BitEx.Model.Account;
+using BitEx.Model.User.Dto;
 
 namespace BitEx.IGrain.Repository
 {

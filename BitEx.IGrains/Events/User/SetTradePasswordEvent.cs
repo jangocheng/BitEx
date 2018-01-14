@@ -1,9 +1,8 @@
 ﻿using System;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
-using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
+using BitEx.Model.User;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -36,19 +35,5 @@ namespace BitEx.IGrain.Events.User
             Type = type;
         }
         public SetTradePasswordEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                if (modelState.TradePasswordType == TradePasswordType.None && string.IsNullOrEmpty(modelState.TradePassword))
-                {
-                    modelState.Points += 1000;
-                }
-                modelState.TradePassword = this.Password;
-                modelState.TradePasswordType = Type;
-            }
-        }
     }
 }

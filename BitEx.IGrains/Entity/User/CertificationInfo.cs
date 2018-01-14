@@ -1,4 +1,5 @@
-﻿using Orleans.Concurrency;
+﻿using BitEx.Model.User;
+using Orleans.Concurrency;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace BitEx.IGrain.Entity.User
     [Immutable]
     public class CertificationInfo
     {
-        public CertificationType Type { get; set; }
+        public CertificationType CerType { get; set; }
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// 认证的图片

@@ -20,7 +20,7 @@ namespace BitEx.IGrain.Actors
         Task CancelWithdrawWithholdAsync(string commandId, string messageId, string withdrawId, decimal amount, string result);
         Task DepositIncreaseAsync(string commandId, string messageId, string depositId, string fundSourceId, decimal amount);
         Task CancelDepositDecreaseAsync(string commandId, string messageId, string depositId, string fundSourceId, decimal amount);
-        Task<TResult> TransferToAsync(TransferType txType, string txOwnerName, BankType txAccountType, string txSubbranch, string txAccountNumber, decimal amount, string txNo, decimal txFee, string remark, int operatorId);
+        Task<Result> TransferToAsync(TransferType txType, string txOwnerName, BankType txAccountType, string txSubbranch, string txAccountNumber, decimal amount, string txNo, decimal txFee, string remark, int operatorId);
         Task<CapitalAccountDefaultInfo> GetDefaultInfoAsync();
     }
 }

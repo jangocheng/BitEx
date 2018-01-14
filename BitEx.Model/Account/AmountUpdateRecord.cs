@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coin.Model.Account
+namespace BitEx.Model.Account
 {
     [Table("Coin_AmountUpdateRecord", autoIncrement: false)]
     public class AmountUpdateRecord

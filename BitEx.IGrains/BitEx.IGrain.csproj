@@ -4,12 +4,22 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.5.0" />
     <PackageReference Include="Ray.Core" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BitEx.Core\BitEx.Core.csproj" />
+    <ProjectReference Include="..\BitEx.Framework\BitEx.Framework.csproj" />
     <ProjectReference Include="..\BitEx.Model\BitEx.Model.csproj" />
   </ItemGroup>
 

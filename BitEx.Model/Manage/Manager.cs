@@ -1,6 +1,6 @@
 ﻿using System;
 using BitEx.Dapper.Core;
-namespace Coin.Model.Manage
+namespace BitEx.Model.Manage
 {
     [Table("Coin_Manager", autoIncrement: true)]
     public class Manager

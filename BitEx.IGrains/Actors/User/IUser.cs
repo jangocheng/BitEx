@@ -2,14 +2,14 @@
 using Orleans;
 using BitEx.IGrain.Entity.User;
 using BitEx.IGrain.States;
-using Coin.Core;
 using System.Collections.Generic;
-using Orleans.Concurrency;
 using System;
 using BitEx.IGrain.Entity.User.DTO;
-using Coin.Core.Notice;
-using Coin.Framework.ThirdParty;
-using BitEx.IGrain.Entity.Notice;
+using BitEx.Core;
+using BitEx.Core.Result;
+using BitEx.Core.Jwt;
+using BitEx.Model.User;
+using BitEx.Framework.Notice;
 
 namespace BitEx.IGrain.Actors
 {
@@ -17,31 +17,39 @@ namespace BitEx.IGrain.Actors
     {
         #region 注册登陆
         /// <summary>
+        /// 创建token
+        /// </summary>
+        /// <param name="aud">token的使用场景(web,app,open api)</param>
+        /// <param name="exp">过期时间</param>
+        /// <param name="ipLim">ip绑定</param>
+        /// <returns></returns>
+        Task<string> CreateJwtToken(Audience aud, long exp, string ipLim = null);
+        /// <summary>
+        /// 验证token
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="payload"></param>
+        /// <param name="sign">签名</param>
+        /// <returns></returns>
+        Task<Result<int>> VerifyJwt(Lang lang, Header head, Payload payload, string sign);
+        /// <summary>
         /// 登陆
         /// </summary>
-        /// <param name="source">来源(手机or web)</param>
-        /// <param name="password"></param>
-        /// <param name="ip"></param>
-        /// <param name="needSecondVerify">是否需要二次身份验证</param>
-        /// <param name="bindIp">是否绑定IP</param>
-        /// <returns>如果登陆成功，item1里含有加密串，请保存到Cookie</returns>
-        Task<Tuple<LoginStatus, string>> Login(Sources source, string password, string ip, bool needSecondVerify = true, bool bindIp = false);
-        /// <summary>
-        /// 登陆验证
-        /// </summary>
-        /// <param name="loginKey">登陆的加密串，保存在Cookie里</param>
-        /// <returns></returns>
-        Task<LoginVerifyStatus> LoginVerify(Sources source, string loginKey, string ip);
+        /// <returns>如果登陆成功，item1里含有jwt token，请保存到Cookie或每次请求的时候携带</returns>
+        Task<Tuple<LoginStatus, string>> Login(Lang lang, Audience source, string password, string ip, bool bindIp = false);
         /// <summary>
         /// 二次登陆验证
         /// </summary>
         /// <param name="source">请求来源</param>
-        /// <param name="isOtp">是否是otp验证</param>
         /// <param name="code">验证码</param>
         /// <returns></returns>
-        Task<TResult> SecondVerify(Sources source, bool isOtp, string code);
-        Task<LoginVerifyType> GetLoginVerify();
-        Task Loginout(Sources source);
+        Task<Result<string>> SecondVerify(Lang lang, Audience source, string code);
+        /// <summary>
+        /// 获取token的安全信息
+        /// </summary>
+        /// <param name="aud"></param>
+        /// <returns></returns>
+        Task<UserRealtimeInfo> GetRealtimeData(Audience aud);
         #endregion
 
         #region 账号基本信息操作
@@ -53,28 +61,28 @@ namespace BitEx.IGrain.Actors
         /// <param name="remark">操作备注</param>
         /// <returns></returns>
         Task SetVipLevel(UserVipLevel level, int operatorId, string remark);
+        Task SetPromoteLevel(PromoteLevel level, int operatorId, string remark);
         /// <summary>
         /// 设置语言
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="lang"></param>
         /// <returns></returns>
-        Task SetLangType(LangType type);
+        Task SetLangType(Lang lang);
         /// <summary>
-        /// 获取当前用户的语言设置
+        /// 获取基本信息
         /// </summary>
         /// <returns></returns>
-        Task<LangType> GetLangType();
-        /// <summary>
-        /// 获取登陆信息
-        /// </summary>
-        /// <returns></returns>
-        Task<UserLoginInfo> GetLoginInfo();
+        Task<UserBaseInfo> GetBaseInfo();
         /// <summary>
         /// 设置用户昵称
         /// </summary>
         /// <param name="nickName">用户昵称</param>
         /// <returns></returns>
-        Task<TResult> SetNickName(string nickName);
+        Task<Result<string>> SetNickName(Lang lang, string nickName);
+        #endregion
+        #region 消息通知
+        Task<Result<string>> VerifyEmailCaptcha(string code, Lang lang);
+        Task<Result<string>> SendEmailCaptcha(Lang lang);
         #endregion
 
         #region 实名认证
@@ -86,7 +94,7 @@ namespace BitEx.IGrain.Actors
         /// <param name="data">认证数据</param>
         /// <param name="needAudit">是否需要审核</param>
         /// <returns></returns>
-        Task<TResult> ApplyCertification(CertificationType type, List<string> images, string data, bool needAudit = true);
+        Task<Result<string>> ApplyCertification(CertificationType type, List<string> images, string data, Lang lang, bool needAudit = true);
         /// <summary>
         /// 审核身份认证信息
         /// </summary>
@@ -95,36 +103,24 @@ namespace BitEx.IGrain.Actors
         /// <param name="managerId">审核管理员Id</param>
         /// <param name="auditRemark">审核备注</param>
         /// <returns></returns>
-        Task<TResult> AuditCertificationInfo(CertificationType type, bool result, int managerId, string auditRemark);
-        /// <summary>
-        /// 获取实名认证信息列表
-        /// </summary>
-        /// <returns></returns>
-        Task<List<CertificationInfo>> GetCertificationList();
-        /// <summary>
-        /// 根据认证类型获取身份认证信息
-        /// </summary>
-        /// <param name="type">认证类型</param>
-        /// <returns></returns>
-        Task<CertificationInfo> GetCertification(int type);
+        Task<Result<string>> AuditCertificationInfo(bool result, int managerId, string auditRemark);
+        Task<CertificationInfo> GetCertification();
         #endregion
         #region 账号安全
+        Task<string> GetOtpSecretKey();
+        Task<Result<string>> BindOtp(Audience source, string code, string captcha, Lang lang);
+        Task UnBindOtp(string remark);
+        Task<bool> VerifyOtp(string code);
         /// <summary>
-        /// 忘记密码
+        /// 解除锁定
         /// </summary>
-        /// <param name="forgotType">忘记密码方式</param>
-        /// <param name="idNo">身份证号码</param>
         /// <param name="lang"></param>
-        /// <returns>0:手机,1:邮箱</returns>
-        Task<TResult> SendForgotPasswordCaptcha(BindType forgotType, string idNo = null, LangType lang = LangType.ZH, bool isVoice = false);
-        Task<BindType> GetAuthType();
-        Task<string> GetCountryCode();
-        /// <summary>
-        /// 判断用户是否绑定了身份证
-        /// </summary>
+        /// <param name="remark">备注</param>
+        /// <param name="mandatory">是否强制解锁</param>
         /// <returns></returns>
-        Task<bool> IsBindIDNo();
-        Task<TResult> ForgotPasswordVerify(BindType type, string code, string idNo = null);
+        Task<Result<string>> UnLock(Lang lang, string remark, bool mandatory);
+        Task<Result<int>> VerifyTradePassword(Lang lang, string password);
+        Task<Result<string>> VerifyTradePasswordAndOtp(Lang lang, string tradePassword, string code);
         /// <summary>
         /// 强制修改密码
         /// </summary>
@@ -137,61 +133,17 @@ namespace BitEx.IGrain.Actors
         /// <param name="oldPassword"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        Task<TResult> UpdatePassword(string oldPassword, string newPassword);
-        Task<TResult> SetTradePwd(string password, TradePasswordType auditType);
-        Task<TResult> SetTradePwdType(string password, TradePasswordType auditType);
-        Task<TResult> UpdateTradePwd(string oldPassword, string newPassword);
-        Task<TResult> SendForgotTradePasswordCaptcha(bool isVoice = false);
-        Task<TResult> ForgotTradePassword(string password, string code);
-        Task<TResult> ForgotTradePasswordByOtp(string password, string otpCode);
-        Task<TResult> VerifyTradePassword(string password);
-        Task<string> GetOtpSecretKey();
-        Task<TResult> BindOtp(Sources source, string code, string captcha);
-        Task UnBindOtp(string remark);
-        Task<bool> IsBindOtp();
-        Task<bool> VerifyOtp(string code);
-        Task<bool> IsPhoneRegistered();
-        Task<TResult> EmailActiveApply(string email);
-        Task<TResult> BindEmail(string captcha);
-        Task<TResult> UnBindEmail(string remark);
-        Task<TResult> SendEmailCaptcha();
-        Task<TResult> VerifyEmailCaptcha(string code);
-        /// <summary>
-        /// 激活手机申请
-        /// </summary>
-        /// <returns></returns>
-        Task<TResult> PhoneActiveApply(string phone, bool isVoice = false);
-        Task<TResult> BindPhone(Sources source, string code);
-        Task<TResult> UnBindPhone(string remark);
-        /// <summary>
-        /// 发送普通手机验证码
-        /// </summary>
-        /// <returns></returns>
-        Task<TResult> SendPhoneCaptcha(bool isVoice = false);
-        /// <summary>
-        /// 验证码普通手机验证码
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        Task<TResult> VerifyPhoneCaptcha(string code);
-        Task Lock(UserLockType type, string remark);
-        Task<TResult> UnLock(string remark, bool mandatory);
-        Task<UserLockType> GetLockType();
-        Task<TradePasswordType> GetTradePasswordType();
-        #endregion
+        Task<Result<string>> UpdatePassword(Lang lang, string oldPassword, string newPassword);
+        Task<Result<string>> SetTradePwd(string password, TradePasswordType auditType);
+        Task<Result<string>> SetTradePwdType(Lang lang, string password, TradePasswordType auditType);
+        Task<Result<string>> UpdateTradePwd(Lang lang, string oldPassword, string newPassword);
+        Task<Result<string>> ForgotTradePasswordByOtp(Lang lang, string password, string otpCode);
 
-        #region 用户操作日志
-        [AlwaysInterleave]
-        Task WriteUserLog(string logTplKey, Dictionary<string, string> values, UserLogType type, UserLogLevel level);
-        Task<List<UserLog>> GetUserLogs(UserLogType type, int page, int pageSize);
-        Task<long> GetUserLogsTotal(UserLogType type);
+        Task Lock(UserLockType type, string remark);
         #endregion
 
         #region 交易部分
-        Task<TResult> WithdrawalApplyByOtp(string currencyId, string bankId, decimal amount, string password, string validCode);
-        Task<TResult> WithdrawalApplyByPhone(string currencyId, string bankId, decimal amount, string password, string validCode);
-        Task WithdrawalCancel(string messageId, decimal amount, DateTime withdrawlTime);
-        Task<TResult> CoinWithdrawalApply(string currencyId, decimal volume, string address, string memo = null);
+        Task<Result<string>> CoinWithdrawalApply(Lang lang, string password, string validCode, string currencyId, decimal volume, decimal limitExchangeAmount, string address, string memo = null);
         /// <summary>
         /// 获取推广人ID
         /// </summary>
@@ -199,8 +151,8 @@ namespace BitEx.IGrain.Actors
         Task<string> GetPromoter();
         Task<List<BankCardInfo>> GetBankCardList();
         Task DeleteBankCard(string id);
-        Task<TResult> AddBankCard(BankType bankType, string bank, string province, string city, string branchBank, string cardNumber);
-        Task<decimal> GetWithdrawLimit();
+        Task<Result<string>> AddBankCard(Lang lang, string country, string bank, string cardNumber, string noteInfo);
+        Task<UserWithdrawalLimit> GetWithdrawLimit();
         /// <summary>
         /// 订单价格校验
         /// </summary>
@@ -210,27 +162,6 @@ namespace BitEx.IGrain.Actors
         /// <returns></returns>
         Task<bool> OrderPriceVerify(string marketId, OrderType type, decimal price);
         #endregion
-
-        #region 用户信息获取
-        /// <summary>
-        /// 获取vip等级
-        /// </summary>
-        /// <returns></returns>
-        Task<UserVipLevel> GetVipLevel();
-        /// <summary>
-        /// 获取用户认证等级
-        /// </summary>
-        /// <returns></returns>
-        Task<int> GetVerifyLevel();
-        /// <summary>
-        /// 获取用户手机号码
-        /// </summary>
-        /// <returns></returns>
-        Task<string> GetPhone();
-
-        #endregion
-        Task<TResult> VerifyTradePasswordAndPhoneCaptcha(string tradePassword, string code);
-        Task<TResult> VerifyTradePasswordAndOtp(string tradePassword, string code);
 
         Task SetUserConfig(UserConfigEnum key, string value);
         Task<string> GetUserConfig(UserConfigEnum key);
@@ -243,10 +174,8 @@ namespace BitEx.IGrain.Actors
         /// </summary>
         /// <param name="key">模板key</param>
         /// <param name="values">模板值</param>
-        /// <param name="noticeType">通知类型</param>
-        /// <param name="isVoice">是否是语音通知</param>
         /// <returns></returns>
-        Task Notice(NoticeKey key, Dictionary<string, string> values, NoticeType noticeType = NoticeType.All, string emailAddress = null, string phoneNumber = null, bool isVoice = false);
+        Task Notice(NoticeTplKey key, Dictionary<string, string> values, Lang lang = Lang.Default);
         /// <summary>
         /// 添加用户活跃市场
         /// </summary>
@@ -258,46 +187,5 @@ namespace BitEx.IGrain.Actors
         /// </summary>
         /// <returns></returns>
         Task<List<string>> GetActiveMarketList();
-        /// <summary>
-        /// 获取用户的Api开放key列表
-        /// </summary>
-        /// <returns></returns>
-        Task<List<OpenKeyInfo>> GetOpenList();
-        /// <summary>
-        /// 获取用户的open key信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<OpenKeyInfo> GetOpenKey(string id);
-        /// <summary>
-        /// 创建Open key
-        /// </summary>
-        /// <param name="lable">标签</param>
-        /// <param name="limits">key的权限</param>
-        /// <param name="ips">绑定的ip</param>
-        /// <returns></returns>
-        Task<TResult<OpenKeyInfo>> CreateOpenKey(string lable, int[] limits, string[] ips);
-        /// <summary>
-        /// 删除openKey信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task RemoveOpenKey(string id);
-        /// <summary>
-        /// 绑定IP
-        /// </summary>
-        /// <param name="id">openkey的id</param>
-        /// <param name="ips">ip地址列表</param>
-        /// <returns></returns>
-        Task BindOpenKeyIP(string id, string[] ips);
-        /// <summary>
-        /// 开放API验证
-        /// </summary>
-        /// <param name="apiPath">API路径</param>
-        /// <param name="id"></param>
-        /// <param name="ip">请求的IP地址</param>
-        /// <param name="timestamp">时间戳</param>
-        /// <returns></returns>
-        Task<OpenKeyVerifyResult> VerifyOpenKey(string apiPath, string id, string ip, long timestamp = 0);
     }
 }

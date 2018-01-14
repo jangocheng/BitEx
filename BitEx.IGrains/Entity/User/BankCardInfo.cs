@@ -1,6 +1,4 @@
-﻿using Coin.Framework.ThirdParty;
-using ProtoBuf;
-using BitEx.IGrain.States;
+﻿using ProtoBuf;
 using Orleans.Concurrency;
 
 namespace BitEx.IGrain.Entity.User
@@ -10,11 +8,9 @@ namespace BitEx.IGrain.Entity.User
     public class BankCardInfo
     {
         public string Id { get; set; }
-        public BankType BankType { get; set; }
-        public string Province { get; set; }
-        public string City { get; set; }
+        public string Country { get; set; }
         public string Bank { get; set; }
-        public string BranchBank { get; set; }
         public string CardNumber { get; set; }
+        public string NoteInfo { get; set; }
     }
 }

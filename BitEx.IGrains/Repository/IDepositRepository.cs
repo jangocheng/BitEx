@@ -12,7 +12,7 @@ namespace BitEx.IGrain.Repository
         Task<DepositState> GetAsync(string id);
         Task<DepositState> GetAsync(int identity, decimal amount);
         Task<bool> CreateAsync(string id, string userId, string currencyId, string accountId, DepositWay depositWay, string capitalAccountId, string fundSourceId, decimal amount, string remark, DepositStatus status, int identify, DateTime createdAt);
-        Task<bool> CreateFailAsync(string id, string userId, string accountId, string currencyId, string capitalAccountId, string fundSourceId, DepositWay depositWay, decimal amount, DepositStatus status, TResult result);
+        Task<bool> CreateFailAsync(string id, string userId, string accountId, string currencyId, string capitalAccountId, string fundSourceId, DepositWay depositWay, decimal amount, DepositStatus status, Result result);
         Task<bool> ConfirmAsync(string id, string fundSourceId, decimal txAmount, decimal fee, decimal txFee, int operatorId, DepositStatus status, DateTime doneAt);
         Task<bool> ChangeStatusAsync(string id, DepositStatus status, int operatorId);
         Task<bool> ClearInvalid(int operatorId);

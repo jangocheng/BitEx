@@ -1,7 +1,7 @@
 ﻿using BitEx.Dapper.Core;
 using System;
 
-namespace Coin.Model.User
+namespace BitEx.Model.User
 {
     [Table("Coin_Certification", autoIncrement: false)]
     public class UserVipFee

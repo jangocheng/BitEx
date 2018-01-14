@@ -22,7 +22,7 @@ namespace BitEx.IGrain.Events
         public int Confirmation { get; set; }
         public int TxConfirmation { get; set; }
         public string TxNo { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         public CoinDepositStatus Status { get; set; }
         private static string _TypeCode = typeof(CoinDepositGuaranteeTerminatedEvent).FullName;
         [ProtoIgnore]
@@ -31,7 +31,7 @@ namespace BitEx.IGrain.Events
         public CoinDepositGuaranteeTerminatedEvent()
         {
         }
-        public CoinDepositGuaranteeTerminatedEvent(string commandId, string userId, string currencyId, string txNo, bool isDeposited, int confirmation, int txConfirmation, string guaranteeId, bool isMortgagedVirtualCoin, string mortgagedAccountId, decimal mortgagedAmount, TResult result)
+        public CoinDepositGuaranteeTerminatedEvent(string commandId, string userId, string currencyId, string txNo, bool isDeposited, int confirmation, int txConfirmation, string guaranteeId, bool isMortgagedVirtualCoin, string mortgagedAccountId, decimal mortgagedAmount, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

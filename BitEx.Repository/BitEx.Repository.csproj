@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="1.50.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BitEx.Framework\BitEx.Framework.csproj" />
+    <ProjectReference Include="..\BitEx.IRepository\BitEx.IRepository.csproj" />
+    <ProjectReference Include="..\BitEx.Model\BitEx.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Lang\" />
+    <Folder Include="Account\" />
+  </ItemGroup>
+
+</Project>

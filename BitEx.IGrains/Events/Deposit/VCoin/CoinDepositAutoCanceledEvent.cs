@@ -22,7 +22,7 @@ namespace BitEx.IGrain.Events
         public int Confirmation { get; set; }
         public int TxConfirmation { get; set; }
         public string TxNo { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         public CoinDepositStatus Status { get; set; }
         private static string _TypeCode = typeof(CoinDepositAutoCanceledEvent).FullName;
         [ProtoIgnore]
@@ -31,7 +31,7 @@ namespace BitEx.IGrain.Events
         public CoinDepositAutoCanceledEvent()
         {
         }
-        public CoinDepositAutoCanceledEvent(string commandId, string userId, string currencyId, int confirmation, int txConfirmation, TResult result)
+        public CoinDepositAutoCanceledEvent(string commandId, string userId, string currencyId, int confirmation, int txConfirmation, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

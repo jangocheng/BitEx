@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coin.Model.User
+namespace BitEx.Model.User
 {
     [Table("coin_promoterdividend", autoIncrement: false)]
     public class PromoterDividend

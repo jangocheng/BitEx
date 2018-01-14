@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Coin.Core.EventSourcing;
-using Coin.Framework.ThirdParty;
 using BitEx.IGrain.States;
 using ProtoBuf;
 using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
 using Newtonsoft.Json;
+using BitEx.Model.User;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -45,61 +45,5 @@ namespace BitEx.IGrain.Events.User
             this.NeedAudit = needAudit;
         }
         public CertificationUpdateEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                var cerInfo = modelState.CertificationList.First(c => c.Type == CerType);
-                cerInfo.AuditTime = Timestamp;
-                cerInfo.Type = CerType;
-                cerInfo.Images = Images;
-                if (!NeedAudit)
-                {
-                    var cerData = JsonConvert.DeserializeObject<CertificationData86>(this.Data);
-                    if (cerData != null)
-                    {
-                        modelState.RealName = cerData.Name;
-                        modelState.IDNo = cerData.CardNumber;
-                    }
-                    cerInfo.Status = CertificationStatus.AuditSucess;
-                    modelState.VerifyLevel = CertificationTypeService.GetCertificationLevel(modelState.CertificationList);
-                    #region
-                    //验证成功后，银行卡添加到银行卡列表
-                    bool isAddBankList = cerInfo.Type == CertificationType.Bankcard || cerInfo.Type == CertificationType.AdvancedBankcard;
-                    if (isAddBankList)
-                    {
-                        if ((cerData != null) && !modelState.BankCardList.Exists(b => b.CardNumber.Equals(cerData.BankcardNumber)))
-                        {
-                            var bankCard = new BankCardInfo()
-                            {
-                                Id = this.Id,
-                                BankType = (BankType)int.Parse(cerData.BankType),
-                                Province = cerData.Province,
-                                City = cerData.CityName,
-                                CardNumber = cerData.BankcardNumber,
-                                Bank = cerData.Bank,
-                                BranchBank = cerData.BranchBank
-                            };
-                            modelState.BankCardList.Add(bankCard);
-                        }
-                    }
-                    #endregion
-                }
-                else
-                {
-                    var cerData = JsonConvert.DeserializeObject<CerDataInfo>(this.Data);
-                    if (cerData != null)
-                    {
-                        modelState.RealName = cerData.Name;
-                        modelState.IDNo = cerData.CardNumber;
-                    }
-                    cerInfo.Status = CertificationStatus.Apply;
-                }
-                cerInfo.AuditManagerId = 0;
-                cerInfo.Data = Data;
-            }
-        }
     }
 }

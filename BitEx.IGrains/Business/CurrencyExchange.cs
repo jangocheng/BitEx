@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Coin.Model.Withdrawl;
+using BitEx.Model.Withdrawl;
 using BitEx.IGrain.Repository;
 using Coin.Core.Ioc;
 using Autofac;

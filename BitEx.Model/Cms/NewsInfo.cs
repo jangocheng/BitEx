@@ -2,7 +2,7 @@
 using BitEx.Dapper.Core;
 using ProtoBuf;
 
-namespace Coin.Model.Cms
+namespace BitEx.Model.Cms
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     [Table("Coin_News", autoIncrement: true)]

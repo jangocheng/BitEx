@@ -1,6 +1,6 @@
 ﻿using BitEx.Dapper.Core;
 using BitEx.IGrain.States;
-using Coin.Model.Order;
+using BitEx.Model.Order;
 using System.Threading.Tasks;
 
 namespace BitEx.IGrain.Repository

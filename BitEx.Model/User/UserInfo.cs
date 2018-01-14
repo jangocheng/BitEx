@@ -1,7 +1,7 @@
 ﻿using System;
 using BitEx.Dapper.Core;
 
-namespace Coin.Model.User
+namespace BitEx.Model.User
 {
     [Table("Coin_User", autoIncrement: false)]
     public class UserInfo
@@ -18,6 +18,10 @@ namespace Coin.Model.User
         public string Salt { get; set; }
         public string OtpSecretKey { get; set; }
         public short VipLevel { get; set; }
+        /// <summary>
+        /// 推广专员等级
+        /// </summary>
+        public short PromoteLevel { get; set; }
         public string IdNo { get; set; }
         public short IdType { get; set; }
         public string RealName { get; set; }
@@ -28,6 +32,10 @@ namespace Coin.Model.User
         /// 推广人
         /// </summary>
         public string Promoter { get; set; }
+        /// <summary>
+        /// 推广分红结束时间
+        /// </summary>
+        public DateTime PromoterDividendEndTime { get; set; }
         public int Points { get; set; }
         public DateTime CreateTime { get; set; }
         public string CreateBy { get; set; }

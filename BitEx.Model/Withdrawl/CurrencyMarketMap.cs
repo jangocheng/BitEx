@@ -1,6 +1,6 @@
 ﻿using BitEx.Dapper.Core;
 
-namespace Coin.Model.Withdrawl
+namespace BitEx.Model.Withdrawl
 {
     [Table("Coin_ExchangeMapper")]
     public class ExchangeMapper

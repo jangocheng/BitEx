@@ -1,9 +1,8 @@
 ﻿using System;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
-using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
+using Ray.Core.EventSourcing;
+using BitEx.Model.User;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -38,15 +37,5 @@ namespace BitEx.IGrain.Events.User
             this.Status = status;
         }
         public UserLockEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                modelState.LockType = this.LockType;
-                modelState.Status = this.Status;
-            }
-        }
     }
 }

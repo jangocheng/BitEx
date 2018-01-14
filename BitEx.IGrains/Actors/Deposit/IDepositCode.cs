@@ -8,7 +8,7 @@ namespace BitEx.IGrain.Actors
     public interface IDepositCode : IGrainWithStringKey
     {
         Task CreateAsync(string currencyId, string fundSourceId, decimal amount, string code, string password, int operatorId);
-        Task<TResult> UseAsync(string password, string usedBy);
-        Task<TResult> DestroyAsync(DateTime destroyedAt, int operatorId);
+        Task<Result> UseAsync(string password, string usedBy);
+        Task<Result> DestroyAsync(DateTime destroyedAt, int operatorId);
     }
 }

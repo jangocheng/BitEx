@@ -17,7 +17,7 @@ namespace BitEx.IGrain.Events
         public string CurrencyId { get; set; }
         public string DepositId { get; set; }
         public string GuaranteeId { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         public decimal LastTotalAmount { get; set; }
         private static string _TypeCode = typeof(CoinMortgageRedeemingFailedEvent).FullName;
         [ProtoIgnore]
@@ -26,7 +26,7 @@ namespace BitEx.IGrain.Events
         public CoinMortgageRedeemingFailedEvent()
         {
         }
-        public CoinMortgageRedeemingFailedEvent(string commandId, string userId, string currencyId, string depositId, string guaranteeId, TResult result)
+        public CoinMortgageRedeemingFailedEvent(string commandId, string userId, string currencyId, string depositId, string guaranteeId, Result result)
         {
             this.CommandId = commandId;
             this.UserId = userId;

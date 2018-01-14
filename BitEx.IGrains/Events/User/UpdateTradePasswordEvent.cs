@@ -1,9 +1,7 @@
 ﻿using System;
-using Coin.Core.EventSourcing;
-using BitEx.IGrain.States;
 using ProtoBuf;
-using BitEx.IGrain.Entity.User;
 using Orleans.Concurrency;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -36,16 +34,5 @@ namespace BitEx.IGrain.Events.User
             this.IsForget = isForgot;
         }
         public UpdateTradePasswordEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                modelState.TradePassword = this.Password;
-                if (IsForget)
-                    modelState.ForgotTradePasswordTime = this.Timestamp;
-            }
-        }
     }
 }

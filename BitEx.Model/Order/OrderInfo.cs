@@ -1,7 +1,7 @@
 ﻿using System;
 using BitEx.Dapper.Core;
 
-namespace Coin.Model.Order
+namespace BitEx.Model.Order
 {
     [Table("Coin_Order", autoIncrement: false)]
     public class OrderInfo

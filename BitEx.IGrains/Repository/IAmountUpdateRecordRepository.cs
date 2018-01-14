@@ -1,5 +1,5 @@
 ﻿using BitEx.Dapper.Core;
-using Coin.Model.Account;
+using BitEx.Model.Account;
 using System.Threading.Tasks;
 
 namespace BitEx.IGrain.Repository

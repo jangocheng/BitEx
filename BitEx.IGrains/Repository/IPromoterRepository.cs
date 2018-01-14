@@ -1,6 +1,6 @@
 ﻿using BitEx.Dapper.Core;
-using Coin.Model.User;
-using Coin.Model.User.Dto;
+using BitEx.Model.User;
+using BitEx.Model.User.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

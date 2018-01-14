@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coin.Model
+namespace BitEx.Model
 {
     public class Deposit
     {

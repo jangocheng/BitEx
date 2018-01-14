@@ -1,6 +1,6 @@
 ﻿using BitEx.Dapper.Core;
 using BitEx.IGrain.States;
-using Coin.Model.Trade.Dto;
+using BitEx.Model.Trade.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

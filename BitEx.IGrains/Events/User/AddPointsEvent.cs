@@ -1,9 +1,7 @@
-﻿using Coin.Core.EventSourcing;
-using BitEx.IGrain.Entity.User;
-using BitEx.IGrain.States;
-using Orleans.Concurrency;
+﻿using Orleans.Concurrency;
 using ProtoBuf;
 using System;
+using Ray.Core.EventSourcing;
 
 namespace BitEx.IGrain.Events.User
 {
@@ -39,20 +37,5 @@ namespace BitEx.IGrain.Events.User
             this.Remark = remark;
         }
         public AddPointsEvent() { }
-        public void Apply(IState<string> state)
-        {
-            var modelState = state as UserState;
-            if (modelState != null)
-            {
-                this.ApplyBase(modelState);
-                modelState.Points = TotalPoints;
-                modelState.LiveLoginPointTime = Timestamp;
-                modelState.VipLevel = UserVipLeverService.GetVipLevel(modelState.VipLevel, modelState.Points);//增加积分
-                if (Unique != null && !modelState.UniquePointsKeyList.Contains(Unique))
-                {
-                    modelState.UniquePointsKeyList.Add(Unique);
-                }
-            }
-        }
     }
 }

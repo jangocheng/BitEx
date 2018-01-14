@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Coin.Model.Notice;
+using BitEx.Model.Notice;
 using BitEx.Dapper.Core;
 
 namespace BitEx.IGrain.Repository.Notice

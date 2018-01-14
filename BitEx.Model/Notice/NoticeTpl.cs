@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coin.Model.Notice
+namespace BitEx.Model.Notice
 {
     [Table("Coin_NoticeTpl", autoIncrement: true)]
     public class NoticeTpl

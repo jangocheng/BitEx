@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BitEx.IGrain.Entity.User
 {
     [Flags]
-    public enum LoginStatus
+    public enum LoginStatus:byte
     {
-        None=0,
+        None = 0,
         Success = 1,
         PasswordError = 2,
-        NeedSecurityValid = 4,
-        IsLock = 8,
-        ErrorMoreThanMost = 16,
-        AccountNotExist = 32
+        IsLock = 4,
+        ErrorMoreThanMost = 8,
+        AccountNotExist = 16
     }
 }

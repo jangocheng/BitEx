@@ -23,7 +23,7 @@ namespace BitEx.IGrain.Events
         /// </summary>
         public decimal CnyAmount { get; set; }
         public decimal Fee { get; set; }
-        public TResult Result { get; set; }
+        public Result Result { get; set; }
         public int OperatorId { get; set; }
         public CoinWithdrawStatus Status { get; set; }
         private static string _TypeCode = typeof(CoinWithdrawCanceledEvent).FullName;
@@ -33,7 +33,7 @@ namespace BitEx.IGrain.Events
         public CoinWithdrawCanceledEvent()
         {
         }
-        public CoinWithdrawCanceledEvent(string commandId, string userId, string currencyId, string accountId, string address, decimal volume, decimal cnyAmount, decimal fee, TResult result, int operatorId)
+        public CoinWithdrawCanceledEvent(string commandId, string userId, string currencyId, string accountId, string address, decimal volume, decimal cnyAmount, decimal fee, Result result, int operatorId)
         {
             this.CommandId = commandId;
             this.UserId = userId;
